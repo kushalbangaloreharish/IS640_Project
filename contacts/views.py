@@ -21,7 +21,15 @@ def contact_detail(request, pk):
     return render(request, 'detail.html', {'contact': contact})
 
 def contact_edit(request, pk):
-    pass
+    contact = Contact.objects.get(pk=pk)
+    if request.method == "POST":
+        form = ContactForm(request.POST, instance=contact)
+        if form.is_valid():
+            form.save()
+            return redirect('contact_detail', pk=contact.pk)
+    else:
+        form = ContactForm(instance=contact)
+    return render(request, 'edit.html', {'form': form})
 
 def contact_delete(request, pk):
     pass
