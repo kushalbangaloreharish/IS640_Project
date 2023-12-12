@@ -17,7 +17,8 @@ def contact_create(request):
     return render(request, 'create.html', {'form': form})
 
 def contact_detail(request, pk):
-    pass
+    contact = Contact.objects.get(pk=pk)
+    return render(request, 'detail.html', {'contact': contact})
 
 def contact_edit(request, pk):
     pass
