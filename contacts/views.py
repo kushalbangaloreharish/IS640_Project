@@ -32,4 +32,8 @@ def contact_edit(request, pk):
     return render(request, 'edit.html', {'form': form})
 
 def contact_delete(request, pk):
-    pass
+    contact = Contact.objects.get(pk=pk)
+    if request.method == "POST":
+        contact.delete()
+        return redirect('contact_list')
+    return render(request, 'delete.html', {'contact': contact})
